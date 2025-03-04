@@ -3,10 +3,14 @@ import cors from "cors";
 import { db } from "db/client";
 import { authMiddleware } from "./middleware";
 
+
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}))
 
 
 app.post("/project", authMiddleware, async (req, res) => {
@@ -37,6 +41,6 @@ app.get("/projects", authMiddleware, async (req, res) => {
 })
 
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000")
+app.listen(3001, () => {
+  console.log("Server is running on port 3001")
 })

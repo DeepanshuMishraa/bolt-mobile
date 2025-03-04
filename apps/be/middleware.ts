@@ -9,7 +9,9 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
     return;
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_PUBLIC_KEY as string);
+  const decoded = jwt.verify(token, process.env.JWT_PUBLIC_KEY as string, {
+    algorithms: ["RS256"]
+  });
   if (!decoded) {
     res.status(401).json({ message: "Unauthorized" });
     return;
